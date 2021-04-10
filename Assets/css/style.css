@@ -23,11 +23,14 @@ button {
     font-size:1.5rem;
     background-color: lightskyblue;
     border-radius: 25px;
-    width:25vh;
+    width:25vw;
 }
 
 .oldSearchList {
     border-top: solid grey;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
 }
 
 main {
@@ -46,7 +49,7 @@ main {
     display:flex;
     flex-direction:column;
     flex-grow: 1;
-    width:50vw;
+    width:60vw;
 }
 .searchResults {
     border: solid black;
@@ -55,7 +58,7 @@ main {
 .fiveDayForcastContainer {
     display:flex;
     flex-wrap:wrap;
-    width:50vw;
+    width:60vw;
 }
 
 .fiveDayForcast {
@@ -65,4 +68,5 @@ main {
     justify-content: space-evenly;
     margin-top:20px;
 }
+
 
