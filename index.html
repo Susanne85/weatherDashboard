@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+<body>
+    <header> 
+        <h1>Weather Dashboard</h1>
+    </header>
+    <main class="container" >
+        <div class="searchContainer">
+            <label for ="citySearch" class="city">Search for a City in Australia</label>
+            <input type="text" id="citySearch" name="citySearch" placeholder="Enter City Name to Search">
+            <button type=button id="searchForCity">Search</button>
+       
+        <ul class="oldSearchList"></ul>
+        </div>
+        <div class="searchResultsContainer">
+            <h2 class="searchResults"></h2>
+            <h2>5-Day Forecast</h2>
+            <h3 class="fiveDayForcastContainer">
+            </div>
+    </main>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="Assets/script.js"></script>
+</html>
+

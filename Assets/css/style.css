@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+    margin:5px;
+    padding:0;
+}
+
+header {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color:white;
+    background-color: mediumblue;
+}
+
+
+.city {
+    font-size:1.5rem;
+}
+
+button {
+    font-size:1.5rem;
+    background-color: lightskyblue;
+    border-radius: 25px;
+    width:25vh;
+}
+
+.oldSearchList {
+    border-top: solid grey;
+}
+
+main {
+    display:flex;
+    flex-wrap:wrap;
+    margin:2%;
+}
+.searchContainer {
+    display:flex;
+    font-size:1.5rem;
+    flex-direction:column;
+    flex-grow: 1;
+    width:25vw;
+}
+.searchResultsContainer {
+    display:flex;
+    flex-direction:column;
+    flex-grow: 1;
+    width:50vw;
+}
+.searchResults {
+    border: solid black;
+}
+
+.fiveDayForcastContainer {
+    display:flex;
+    flex-wrap:wrap;
+    width:50vw;
+}
+
+.fiveDayForcast {
+    flex-direction:row;
+    flex-grow: 1;
+    background-color: rgb(55, 55, 143);
+    justify-content: space-evenly;
+    margin-top:20px;
+}
+
