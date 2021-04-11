@@ -86,7 +86,7 @@ function promiseToParse5DayForecastIsFullfilled(fiveDayForecast){
     h3Date = $('<h3>').text('(' + weatherDate + ')');
 
     aIcon = $('<img src="">');
-    aIConUrl = 'http://openweathermap.org/img/w/' + weatherIcon + '.png';
+    aIConUrl = 'https://openweathermap.org/img/w/' + weatherIcon + '.png';
     
     if(i === 1){
       fiveDayForcastItem1.append(h3Date, aIcon, h3Temp, h3Wind, h3Humidty);
@@ -174,7 +174,7 @@ function getCityName(cityName){
         }
     }
 
-    let promiseToGetLatLon = fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + cityName + ',au&limit=1&appid=b26f4816274f049d0516bd544a28d7f5');
+    let promiseToGetLatLon = fetch('https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + ',au&limit=1&appid=b26f4816274f049d0516bd544a28d7f5');
     
     var promiseToParseGetLatLon = promiseToGetLatLon.then(
       promiseToGetLatLonlsFullFulled,
