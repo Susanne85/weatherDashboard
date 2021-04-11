@@ -6,7 +6,7 @@ let oldSearchContainer = $('.oldSearchContainer');
 let searchResults = $('#searchResults');
 let fiveDayForcast = $('.fiveDayForcastContainer');
 
-let myWeatherHistory;
+let buttonItem, myWeatherHistory;
 
 let myWeather = {
  cityName:'',
@@ -17,12 +17,10 @@ myWeatherHistory = JSON.parse(localStorage.getItem("myWeather"));
 
 if (myWeatherHistory !== null) {
   myWeather = Object.values(myWeatherHistory);
-  console.log('cityName is ', myWeather + 'length is ' + myWeather.length);
-
   oldSearchList.remove();
 
   for (i=0; i < myWeather.length; i++){
-    let buttonItem = $('<button class="oldSearchList">').text(myWeather[i]);
+    buttonItem = $('<button class="oldSearchList">').text(myWeather[i]);
     oldSearchContainer.append(buttonItem);
   }
 }
@@ -48,8 +46,6 @@ function promiseToParse5DayForecastIsFullfilled(fiveDayForecast){
   let fiveDayForcastItem3 = $('<h3 class="fiveDayForcast">');
   let fiveDayForcastItem4 = $('<h3 class="fiveDayForcast">');
   let fiveDayForcastItem5 = $('<h3 class="fiveDayForcast">');
-
-  // console.log('fiveDayForecast in parse is ', fiveDayForecast);
 
   let aIcon, aIConUrl, cityName1, cityTitle, h3Temp, h3Wind, h3Humidty, h3UV, h3Date, weatherDate, weatherIcon;
   weatherDate = fiveDayForecast.current.dt ;
@@ -82,10 +78,8 @@ function promiseToParse5DayForecastIsFullfilled(fiveDayForecast){
      
     weatherDate = fiveDayForecast.daily[i].dt;
     weatherDate  = new Date(weatherDate * 1000).toLocaleDateString("en-AU");
-    console.log('temp before' , h3Temp);
-    h3Temp = $('<h3>').text('Temp: ' + fiveDayForecast.daily[i].temp.day);
 
-    console.log('temp after' , h3Temp);
+    h3Temp = $('<h3>').text('Temp: ' + fiveDayForecast.daily[i].temp.day);
     h3Wind = $('<h3>').text('Wind: ' + fiveDayForecast.daily[i].wind_speed);
     h3Humidty = $('<h3>').text('Humidty: ' + fiveDayForecast.daily[i].humidity);
     
@@ -125,12 +119,8 @@ function promiseToGetLatLonlsRejected(getLatLonRejectionReason){
 }
 
 function promiseToParseGetLatLonIsFullfilled(cityLatLong){
-  let cityFound = true, h2Name
+  let h2Name
   
-  cityFound = false;
-
-  
-
   //Only get Weather Details if a Latitude and Longitude has been found
   if (cityLatLong.length != 0){
 
@@ -141,7 +131,6 @@ function promiseToParseGetLatLonIsFullfilled(cityLatLong){
   
     var fiveDayURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + cityLatLong[0].lat +'&lon=' + cityLatLong[0].lon + '&exclude=minutely,hourly,alerts&units=metric&appid=b26f4816274f049d0516bd544a28d7f5';
 
-   
     var promiseToGet5DayForcast = fetch(fiveDayURL);
 
     var promiseToParse5DayForecast = promiseToGet5DayForcast.then(
@@ -153,13 +142,12 @@ function promiseToParseGetLatLonIsFullfilled(cityLatLong){
       promiseToParse5DayForecastIsFullfilled,
       promiseToParse5DayForecastlsRejected
     )
-    cityFound = true;
     
   } else {
     console.log('Latitude and Longitude object is empty');
+    //Clear previous 5 day forecast
+    fiveDayForcast.empty();
   }
-  console.log('returning function', cityFound);
-  return cityFound;
 }
 
 function promiseToParseGetLatLonlsRejected(parseLatLonRejectionReason){
@@ -167,7 +155,7 @@ function promiseToParseGetLatLonlsRejected(parseLatLonRejectionReason){
 }
 
 function getCityName(cityName){
-  let buttonItem, cityFound, cityTitle='', initialLetter, myWeatherHistory;
+  let buttonItem, cityLatLong, initialLetter, myWeatherHistory;
 
   let myWeather = {
    cityName:'',
@@ -198,13 +186,6 @@ function getCityName(cityName){
       promiseToParseGetLatLonlsRejected
     );
 
-    console.log('city found', cityFound);
-    
-    let elementFind = document.getElementById("cityTitle");
-    console.log('find on element Title ', elementFind);
-    if (elementFind != null) {
-      console.log('find on element city Title ', elementFind);
-    }
     //Check that Latitude and Longitude was obtained before saving to Local Storage
     cityName = cityName.toLowerCase();
     initialLetter = (cityName.slice(0,1)).toUpperCase();
@@ -235,4 +216,3 @@ function getOldCityName(event) {
 
  searchForCity.on('click','#searchForCity', getSearchCityName);
  oldSearchContainer.on('click','.oldSearchList', getOldCityName);
-
