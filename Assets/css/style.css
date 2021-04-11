@@ -51,8 +51,11 @@ main {
     flex-grow: 1;
     width:60vw;
 }
-.searchResults {
+
+#searchResults {
     border: solid black;
+    display:none; 
+
 }
 
 .fiveDayForcastContainer {

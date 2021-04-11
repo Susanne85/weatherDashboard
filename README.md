@@ -3,3 +3,5 @@ This application allows the user to search for the current weather and future fi
 The user can choose to enter a new city or select a city/town from a list of previous searches.
 
 The data returned is in metrics, so temperature is in degrees Celieus.
+
+A list of previous towns/cities searched is displayed and the usr can choose to select one of those entries and current weather data and five day forecast willl be provided.

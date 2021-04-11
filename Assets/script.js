@@ -1,15 +1,10 @@
 
-let searchResults = $('.searchResults');
 let searchForCity = $('.searchContainer');
 let oldSearchList = $('.oldSearchList');
 let oldSearchContainer = $('.oldSearchContainer');
-let fiveDayForcast = $('.fiveDayForcastContainer');
 
-let fiveDayForcastItem1 = $('<h3 class = "fiveDayForcast">');
-let fiveDayForcastItem2 = $('<h3 class = "fiveDayForcast">');
-let fiveDayForcastItem3 = $('<h3 class = "fiveDayForcast">');
-let fiveDayForcastItem4 = $('<h3 class = "fiveDayForcast">');
-let fiveDayForcastItem5 = $('<h3 class = "fiveDayForcast">');
+let searchResults = $('#searchResults');
+let fiveDayForcast = $('.fiveDayForcastContainer');
 
 let myWeatherHistory;
 
@@ -48,6 +43,12 @@ function promiseToParse5DayForecastlsRejected (parseFiveDayRejectionReason) {
 
 function promiseToParse5DayForecastIsFullfilled(fiveDayForecast){
 
+  let fiveDayForcastItem1 = $('<h3 class="fiveDayForcast">');
+  let fiveDayForcastItem2 = $('<h3 class="fiveDayForcast">');
+  let fiveDayForcastItem3 = $('<h3 class="fiveDayForcast">');
+  let fiveDayForcastItem4 = $('<h3 class="fiveDayForcast">');
+  let fiveDayForcastItem5 = $('<h3 class="fiveDayForcast">');
+
   // console.log('fiveDayForecast in parse is ', fiveDayForecast);
 
   let aIcon, aIConUrl, cityName1, cityTitle, h3Temp, h3Wind, h3Humidty, h3UV, h3Date, weatherDate, weatherIcon;
@@ -55,10 +56,10 @@ function promiseToParse5DayForecastIsFullfilled(fiveDayForecast){
 
   weatherDate  = new Date(weatherDate * 1000).toLocaleDateString("en-AU");
 
-  cityTitle =  document.getElementsByClassName("cityTitle"); 
-  cityName1 = cityTitle[0].textContent;
+  cityTitle =  document.getElementById("cityTitle");
+  cityName1 = cityTitle.textContent;
   cityName1 = cityName + ' (' + weatherDate + ')';
-  cityTitle[0].textContent = cityName1;
+  cityTitle.textContent = cityName1;
 
   // Setup current day search results
   h3Wind = $('<h3>').text('Wind: ' + fiveDayForecast.current.wind_speed);
@@ -66,8 +67,14 @@ function promiseToParse5DayForecastIsFullfilled(fiveDayForecast){
   h3UV = $('<h3>').text('UV Index: ' + fiveDayForecast.current.uvi);
 
   searchResults.append(h3Temp, h3Wind, h3Humidty, h3UV);
+  
+  //Change attribute to display results
+  document.getElementById("searchResults").style.display = "block";
 
   //Setup next 5 days forecast
+  fiveDayForcast.empty();
+  
+  document.getElementById("fiveDayTitle").style.display = "block";
 
   for (i=1; i < fiveDayForecast.daily.length-2; i++){
 
@@ -75,8 +82,10 @@ function promiseToParse5DayForecastIsFullfilled(fiveDayForecast){
      
     weatherDate = fiveDayForecast.daily[i].dt;
     weatherDate  = new Date(weatherDate * 1000).toLocaleDateString("en-AU");
-    
+    console.log('temp before' , h3Temp);
     h3Temp = $('<h3>').text('Temp: ' + fiveDayForecast.daily[i].temp.day);
+
+    console.log('temp after' , h3Temp);
     h3Wind = $('<h3>').text('Wind: ' + fiveDayForecast.daily[i].wind_speed);
     h3Humidty = $('<h3>').text('Humidty: ' + fiveDayForecast.daily[i].humidity);
     
@@ -85,7 +94,6 @@ function promiseToParse5DayForecastIsFullfilled(fiveDayForecast){
     aIcon = $('<img src="">');
     aIConUrl = 'http://openweathermap.org/img/w/' + weatherIcon + '.png';
     
-  
     if(i === 1){
       fiveDayForcastItem1.append(h3Date, aIcon, h3Temp, h3Wind, h3Humidty);
       fiveDayForcast.append(fiveDayForcastItem1);
@@ -117,13 +125,17 @@ function promiseToGetLatLonlsRejected(getLatLonRejectionReason){
 }
 
 function promiseToParseGetLatLonIsFullfilled(cityLatLong){
-  let h2Name;
+  let cityFound = true, h2Name
+  
+  cityFound = false;
+
+  
 
   //Only get Weather Details if a Latitude and Longitude has been found
   if (cityLatLong.length != 0){
 
     searchResults.empty();
-    h2Name = $('<h2 class="cityTitle">').text(cityLatLong[0].name);
+    h2Name = $('<h2 id="cityTitle">').text(cityLatLong[0].name);
    
     searchResults.append(h2Name);
   
@@ -141,10 +153,13 @@ function promiseToParseGetLatLonIsFullfilled(cityLatLong){
       promiseToParse5DayForecastIsFullfilled,
       promiseToParse5DayForecastlsRejected
     )
-    return;
+    cityFound = true;
+    
   } else {
     console.log('Latitude and Longitude object is empty');
   }
+  console.log('returning function', cityFound);
+  return cityFound;
 }
 
 function promiseToParseGetLatLonlsRejected(parseLatLonRejectionReason){
@@ -152,12 +167,14 @@ function promiseToParseGetLatLonlsRejected(parseLatLonRejectionReason){
 }
 
 function getCityName(cityName){
-  let buttonItem, cityTitle='', initialLetter, myWeatherHistory;
+  let buttonItem, cityFound, cityTitle='', initialLetter, myWeatherHistory;
 
   let myWeather = {
    cityName:'',
   };
 
+  searchResults.empty();
+  
   myWeatherHistory = JSON.parse(localStorage.getItem("myWeather"));
 
   if(cityName !=''){
@@ -181,6 +198,13 @@ function getCityName(cityName){
       promiseToParseGetLatLonlsRejected
     );
 
+    console.log('city found', cityFound);
+    
+    let elementFind = document.getElementById("cityTitle");
+    console.log('find on element Title ', elementFind);
+    if (elementFind != null) {
+      console.log('find on element city Title ', elementFind);
+    }
     //Check that Latitude and Longitude was obtained before saving to Local Storage
     cityName = cityName.toLowerCase();
     initialLetter = (cityName.slice(0,1)).toUpperCase();
@@ -201,8 +225,6 @@ function getCityName(cityName){
 }
 function getSearchCityName (event){
   cityName = event.target.parentElement.children[1].value;
-  //Clear the page 
-  searchResults.empty();
   getCityName(cityName);
 }
 
