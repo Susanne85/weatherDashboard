@@ -12,16 +12,19 @@ let myWeather = {
  cityName:'',
 };
 
-// get any old city/town searches
-myWeatherHistory = JSON.parse(localStorage.getItem("myWeather"));
 
-if (myWeatherHistory !== null) {
-  myWeather = Object.values(myWeatherHistory);
-  oldSearchList.remove();
+function getOldCityList(){
+  // get any old city/town searches
+  myWeatherHistory = JSON.parse(localStorage.getItem("myWeather"));
 
-  for (i=0; i < myWeather.length; i++){
-    buttonItem = $('<button class="oldSearchList">').text(myWeather[i]);
-    oldSearchContainer.append(buttonItem);
+  if (myWeatherHistory !== null) {
+    myWeather = Object.values(myWeatherHistory);
+    oldSearchContainer.empty();
+
+    for (i=0; i < myWeather.length; i++){
+      buttonItem = $('<button class="oldSearchList">').text(myWeather[i]);
+      oldSearchContainer.append(buttonItem);
+    }
   }
 }
 
@@ -205,14 +208,20 @@ function getCityName(cityName){
   }
 }
 function getSearchCityName (event){
+  console.log('in here');
   cityName = event.target.parentElement.children[1].value;
   getCityName(cityName);
+  getOldCityList();
+  
+  //clear the search town/city name
+  event.target.parentElement.children[1].value = '';
 }
 
 function getOldCityName(event) {
   cityName = event.target.textContent;
   getCityName(cityName);
+  getOldCityList();
 }
-
+ getOldCityList();
  searchForCity.on('click','#searchForCity', getSearchCityName);
  oldSearchContainer.on('click','.oldSearchList', getOldCityName);
