@@ -208,7 +208,6 @@ function getCityName(cityName){
   }
 }
 function getSearchCityName (event){
-  console.log('in here');
   cityName = event.target.parentElement.children[1].value;
   getCityName(cityName);
   getOldCityList();

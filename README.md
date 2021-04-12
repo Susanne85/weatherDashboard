@@ -4,7 +4,7 @@ The user can choose to enter a new city or select a city/town from a list of pre
 
 ![Initial page display](./assets/images/1-weatherDashBoard.png)
 
-The data returned is in metrics, so temperature is in degrees Celieus.
+The data returned is in metrics, so temperature is in degrees Celsius.
 ![Entering town/city to search for](./assets/images/2-weatherDashBoard.png)
 
 Results of search for town/city is displayed in the following manner.
