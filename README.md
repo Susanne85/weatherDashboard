@@ -29,3 +29,5 @@ Results of search are:
 Display of page after weather results are retrieved, showing that 'albany' has not been added to the list of previous searches.
 ![Weather results for town/city](./assets/images/8-weatherDashBoard.png)
 
+The following is a link to the deployed application
+(https://susanne85.github.io/weatherDashboard/)

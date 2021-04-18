@@ -16,6 +16,7 @@ let myWeather = {
 function getOldCityList(){
   // get any old city/town searches
   myWeatherHistory = JSON.parse(localStorage.getItem("myWeather"));
+
   if (myWeatherHistory !== null) {
     myWeather = Object.values(myWeatherHistory);
     oldSearchContainer.empty();
