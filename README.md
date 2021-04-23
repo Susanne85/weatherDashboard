@@ -2,6 +2,10 @@ This application allows the user to search for the current weather and future fi
 
 The user can choose to enter a new city or select a city/town from a list of previous searches.
 
+**Link**
+The following is a link to the deployed application: https://susanne85.github.io/weatherDashboard/
+
+
 ![Initial page display](./assets/images/1-weatherDashBoard.png)
 
 The data returned is in metrics, so temperature is in degrees Celsius.
@@ -29,5 +33,3 @@ Results of search are:
 Display of page after weather results are retrieved, showing that 'albany' has not been added to the list of previous searches.
 ![Weather results for town/city](./assets/images/8-weatherDashBoard.png)
 
-The following is a link to the deployed application
-(https://susanne85.github.io/weatherDashboard/)
