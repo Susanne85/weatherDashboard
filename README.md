@@ -3,6 +3,7 @@ This application allows the user to search for the current weather and future fi
 The user can choose to enter a new city or select a city/town from a list of previous searches.
 
 **Link**
+
 The following is a link to the deployed application: https://susanne85.github.io/weatherDashboard/
 
 
