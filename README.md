@@ -1,3 +1,5 @@
+**Weather Dashboard**
+
 This application allows the user to search for the current weather and future five day forecast for a city/town in Australia.
 
 The user can choose to enter a new city or select a city/town from a list of previous searches.
@@ -6,6 +8,17 @@ The user can choose to enter a new city or select a city/town from a list of pre
 
 The following is a link to the deployed application: https://susanne85.github.io/weatherDashboard/
 
+**Technologies Utilised**
+
+. HTML 
+
+. CSS
+
+. Open Weather API
+
+. Javascript
+
+**Application Display**
 
 ![Initial page display](./assets/images/1-weatherDashBoard.png)
 
@@ -34,3 +47,11 @@ Results of search are:
 Display of page after weather results are retrieved, showing that 'albany' has not been added to the list of previous searches.
 ![Weather results for town/city](./assets/images/8-weatherDashBoard.png)
 
+**Liscense**
+
+. MIT
+
+**Contact information**
+
+Susanne Bilney 
+email: xkqk2010@gmail.com
